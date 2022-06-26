@@ -54,7 +54,7 @@ export class AuthService {
     delete user.password;
     // Return the user with token
     return {
-      access_token: this.signToken(user.id, user.email),
+      access_token: await this.signToken(user.id, user.email),
       user,
     };
   }
@@ -68,7 +68,7 @@ export class AuthService {
     const secret = this.config.get('JWT_SECRET');
 
     return this.jwt.signAsync(payload, {
-      expiresIn: '15m',
+      expiresIn: '1d',
       secret,
     });
   }
